@@ -1,101 +1,91 @@
 # Reddit-User-Persona-Generator
 
-# Reddit User Persona Generator
-
-This script analyzes a Reddit user's activity to generate a detailed user persona with citations, following a structured format without using OpenAI APIs.
+Generates comprehensive user personas from Reddit profiles using OpenAI's GPT-4. Analyzes comments/submissions to create structured personality profiles with verified sources.
 
 ## Features
-- Scrapes user comments and posts via Reddit API
-- Analyzes content using NLP techniques (NLTK, TextBlob)
-- Generates comprehensive user persona with:
-  - Personal details
-  - Motivations
-  - Personality traits
-  - Behavior patterns
-  - Goals and frustrations
-- Includes direct citations for all persona elements
-- Outputs results in markdown format
+- Scrapes Reddit user content (comments & submissions)
+- Generates structured personas with:
+  - Demographic info (Age, Occupation, Location)
+  - Personality traits (MBTI dimensions)
+  - Motivations, Goals, and Frustrations
+  - Direct quotes with source links
+- Saves output as Markdown-formatted text files
 
-## Setup Instructions
+## Requirements
+- Python 3.7+
+- Reddit API credentials
+- OpenAI API key (GPT-4 access)
 
-### 1. Install Requirements
+## Setup
+1. Install dependencies:
 
-pip install praw nltk textblob python-dotenv
+pip install praw openai==0.28
 
 
-## 2. Create Reddit App
-Go to https://www.reddit.com/prefs/apps
+Add your API credentials in the notebook:
 
-Click "Create App"
+REDDIT_CLIENT_ID = 'your_client_id'
+REDDIT_CLIENT_SECRET = 'your_client_secret'
+REDDIT_USER_AGENT = 'your_user_agent'
+OPENAI_API_KEY = 'your_openai_key'
 
-Select "script" type
 
-Note your:
+## Usage
+Run all notebook cells
+Call the generator with a Reddit profile URL:
+generate_persona_from_reddit("https://www.reddit.com/user/username/")
+Output includes:
 
-Client ID (under app name)
+- Markdown-formatted persona in Jupyter
+- Text file with sources (username_persona.txt)
 
-Client secret
+## Output Structure
 
-## 3. Configure Environment
-Create .env file with your credentials:
+# [Name]
+**AGE** | [Value]
+**OCCUPATION** | [Value]
+**STATUS** | [Value]
+**LOCATION** | [Value]
+**TIER** | [Value]
+**ARCHETYPE** | [Value]
 
-env
-REDDIT_CLIENT_ID='your_client_id'
-REDDIT_CLIENT_SECRET='your_client_secret'
-REDDIT_USER_AGENT='persona_scraper/1.0 by your_username'
-Usage
-Run the script with:
+## [Trait Summary]
 
-bash
-python reddit_persona.py
-When prompted, enter a Reddit profile URL:
+### MOTIVATIONS
+- [Category]
+  • [Sub-motivation]
 
-text
-Enter Reddit profile URL: https://www.reddit.com/user/ExampleUser/
-
-Output
-The script generates a [username]_persona.txt file containing:
-
-Structured persona with tables and bullet points
-
-Direct citations linking to source content
-
-Analysis of:
-
-Personal details (location, occupation)
-
-Motivations and frustrations
-
-Personality traits
-
-Behavioral patterns
-
-## Sample Output Structure
-**John Doe**
-
-| PERSONAL DETAILS      |               |
-|-----------------------|---------------|
-| Location              | New York      |
-| Occupation            | Developer     |
-
-**MOTIVATIONS**
-- Learning new technologies [Source]
-
-**PERSONALITY**
-| Outlook               | Positive      |
+### PERSONALITY
+| [Trait] | [Trait] |
+|---------|---------|
+| [Value] | [Value] |
 
 **BEHAVIOUR & HABITS**
-- Frequently discusses programming [Source]
+- [Observation] [Source]
 
-**FRUSTRATIONS**
-- Difficulty finding documentation [Source]
+"Direct quote" [Source]
 
-"I love open source projects!" [Source]
 ## Notes
-Respects Reddit API rate limits
+Uses GPT-4 for persona generation (requires OpenAI access)
 
-Processes most recent 150 items (comments + posts)
+Processes the latest 150 activities (100 comments + 50 submissions)
 
-Analysis based on linguistic patterns and statistical NLP
+Includes source verification for all claims
 
-Persona details extracted through keyword matching and sentiment analysis
+Handles private/deleted content gracefully
+
+
+
+# Key highlights:
+1. Requires valid Reddit app credentials and OpenAI API key
+2. Specifically uses OpenAI v0.28 API (compatible with GPT-4)
+3. Output follows a strict markdown template with source citations
+4. Includes error handling for API limits and private profiles
+5. Generates both in-notebook preview and text file output
+
+# Remember to:
+- Keep your API keys secure
+- Check Reddit's API terms of service
+- Verify OpenAI's GPT-4 usage policies
+- Handle user data responsibly (PII considerations)
+
